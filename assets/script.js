@@ -15,10 +15,8 @@
     step 01 (X):create array of question objects
         questions will have properties:
             -question
-            -a
-            -b
-            -c
-            -d
+            -aswers[a,b,c,d]
+            -correct answer = anwers[i]
     step 02 ():create a function that renders questions to the page one at a time
     step 03 ():create a function that renders the high score list
     step 04 ():create a function that adds to the high scores
@@ -29,50 +27,93 @@
     step 09 ():create function that evaluates user input
 
 */
+//variables that will hold the questions and answers
+var quizQuestion = document.querySelector(".question");
+var multipleChoiceList = document.querySelector("#mulitple-choice");
+console.log(quizQuestion);
+console.log(multipleChoiceList);
+//variable that holds the user's score
+var score;
 
-//this is the variable that will hold the question being used by the page
-var currentQuestion = questions[0];
+//variable that holds the time remaining for the quiz
+var timeLeft;
 
-//this array holds all the questions
+//this array holds all the questions. each array element is an object with 3 parameters
 var questions = [
-    questionOne = {
-        question = "Which of these is a valid Markup language?",
-
+    q1 = {
+        question : "Which of these is a valid Markup language?",
+        multipleChoice : ["python", "C++", "HTML", "Microsoft"],
+        correctChoice : "HTML"
     },
-    questionTwo = {
-        question = "What does 'bit' mean?"
-
+    q2 = {
+        question : "What does 'bit' mean?",
+        multipleChoice : ["a little bit", "itty bitty", "Ribbit", "binary digit"],
+        correctChoice : "binary digit"
     },
-    questionThree = {
-        question = "What is the home page of a website usually called?"
-
+    q3 = {
+        question : "What is the home page of a website usually called?",
+        multipleChoice : ["index.html", "index[1]", "home.com", "None of the above"],
+        correctChoice : "index.html"
     },
-    questionFour = {
-        question = "Where in our HTML file to we link to stylesheets and libraries that the page will access?"
-    
+    q4 = {
+        question : "Where in our HTML file to we link to stylesheets and libraries that the page will access?",
+        multipleChoice : ["the JS File", "the <head> element", "the <html> element", "the <header> element"],
+        correctChoice : "the <head> element"
     },
-    questionFive = {
-        question = "How many <div> elements can you use in an HTML file?"
-    
-        
+    q5 = {
+        question : "How many <div> elements can you use in an HTML file?",
+        multipleChoice : ["1 for each letter of the alphabet", "2^n, where n is the size fo your RAM in bytes", "as many as you need", "128"],
+        correctChoice : "as many as you need"
     },
-    questionSix = {
-        question = "Which of these isn't a valid command in Javascript?"
-
+    q6 = {
+        question : "Which of these isn't a valid command in Javascript?",
+        multipleChoice : ["Math.floor(2.62);", "document.write('Hello World');", "var temperature = 98.6;", "for(each): run{foo};"],
+        correctChoice : "for(each): run{foo};"
     },
-    questionSeven = {
-        question = "What doees CSS stand for?"
-
+    q7 = {
+        question : "What doees CSS stand for?",
+        multipleChoice : ["Central Styling Symbols", "Create Small Sponges", "Cascading Style Sheet", "Cest Son Sac"],
+        correctChoice : "Cascading Style Sheet"
     },
-    questionEight = {
-        question = "What is the unsyntaxed code you may use to plan your program called?"
+    q8 = {
+        question : "What is the unsyntaxed code you may use to plan your program called?",
+        multipleChoice : ["psudocode", "precode", "library", "object-oriented programming"],
+        correctChoice : "psudocode"
     },
-    questionNine = {
-        question = "Which of these lines of JS code will set the variable 'input' to a value given by the user?"
-    
+    q9 = {
+        question : "Which of these lines of JS code will set the variable 'input' to a value given by the user?",
+        multipleChoice : ["var num = input;", "var prompt = input('Give me a number!');", "var input === 'Give me a number!'", "var input = prompt('Give me a number!);"],
+        correctChoice : "var input = prompt('Give me a number!);"
     },
-    questionTen = {
-        question = "How many times will the given loop run: for(var i = 0; i < 9; i++)"
-    
+    q10 = {
+        question : "How many times will the given loop run: for(var i = 0; i < 9; i++)",
+        multipleChoice : ["10", "3^2", "i", "2^i"],
+        correctChoice : "3^2"
     }
 ];
+
+//This is the function that renders the question to the page
+function renderQuiz(questionNum){
+
+    //first clear the elements
+    quizQuestion.textContent = "";
+    multipleChoiceList.innerHTML = "";
+
+    //creates an easily accesible object containing the current question
+    var questionObject = questions[questionNum];
+
+    //next display the question and create the answers in a list
+    quizQuestion.textContent = questionObject.question;
+    for(var i = 0; i < questionObject.multipleChoice.length; i ++){
+        var multChoiceli = document.createElement("li");
+        multChoiceli.setAttribute("id", "possible-answer")
+        multChoiceli.textContent = questionObject.multipleChoice[i];
+        var selectButton = document.createElement("button");
+        selectButton.setAttribute("class", "button");
+        selectButton.textContent = "SELECT";
+
+        multChoiceli.appendChild(selectButton);
+        multipleChoiceList.appendChild(multChoiceli);
+    }
+
+}
