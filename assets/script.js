@@ -17,7 +17,7 @@
             -question
             -aswers[a,b,c,d]
             -correct answer = anwers[i]
-    step 02 ():create a function that renders questions to the page one at a time
+    step 02 (X):create a function that renders questions to the page one at a time
     step 03 ():create a function that renders the high score list
     step 04 ():create a function that adds to the high scores
     step 05 ():create event listeners for user to select answer
@@ -30,6 +30,8 @@
 //variables that will hold the questions and answers
 var quizQuestion = document.querySelector(".question");
 var multipleChoiceList = document.querySelector("#mulitple-choice");
+var startButton = document.querySelector(".start-button");
+
 console.log(quizQuestion);
 console.log(multipleChoiceList);
 //variable that holds the user's score
@@ -107,13 +109,32 @@ function renderQuiz(questionNum){
     for(var i = 0; i < questionObject.multipleChoice.length; i ++){
         var multChoiceli = document.createElement("li");
         multChoiceli.setAttribute("id", "possible-answer")
+        multChoiceli.setAttribute("class", "row m-1")
         multChoiceli.textContent = questionObject.multipleChoice[i];
         var selectButton = document.createElement("button");
-        selectButton.setAttribute("class", "button");
+        selectButton.setAttribute("class", "button rounded-button float-right m-1");
         selectButton.textContent = "SELECT";
 
         multChoiceli.appendChild(selectButton);
         multipleChoiceList.appendChild(multChoiceli);
+        selectButton.addEventListener("click", function(event){
+            //next questino function
+        })
     }
 
 }
+
+function renderScores(){
+    var containerEl = document.querySelector(".container");
+    var btnEl = document.querySelector("#btn");
+    var colClass = "col-md-4 text-center border bg-light";
+
+
+}
+
+startButton.addEventListener("click", function(){
+    var questionsIndex = 0;
+    renderQuiz(questionsIndex);
+});
+
+

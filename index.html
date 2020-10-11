@@ -1,31 +1,53 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Home Page</title>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home Page</title>
 
-      <link rel ="stylesheet" href ="">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel ="stylesheet" href ="">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </head>
 
-      
-  </head>
-<body>
-    <!-- navbar -->
+    <body style="background-image: url(https://cdn.britannica.com/08/98408-050-6C806B94/Skyline-Baltimore-Md.jpg)">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <title class="navbar-brand">Maker BRYG</title>
 
-    <!-- card that displays quiz questions -->
-    <div id = "quiz" class = "card">
-        <h1 class = "question card-header">Welcome to the coding quiz</h1>
-        <ul id = "mulitple-choice" class = "card-body">Answer the coding questions and get the highscore! If the time reaches 0 the quiz will end.</ul>
-        
-    </div>
+            <div class="navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="highscores.html">High Scores</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <!-- card that displays quiz questions -->
+        <main class = "container">
+            <div class = "row">
+                <div class = "col-md-3"></div>
+                <div id = "quiz" class = "card col-md-6 m-3">
+                
+                    <h1 class = "question card-header m-3">Welcome to the coding quiz</h1>
+                    <ul id = "mulitple-choice" class = "card-body">Answer the coding questions and get the highscore! If the time reaches 0 the quiz will end.
+                        <li> <button id = "row" class = "start-button">Start Quiz</button></li>
+                    </ul>
+                   
+                </div>
+            </div>
+        </main>
+        <!-- footer -->
+        <footer>
 
-    <!-- footer -->
-    <footer>
-
-    </footer>
-    <script src = "assets/script.js"></script>
-</body>
+        </footer>
+        <script src = "assets/script.js"></script>
+    </body>
 </html>
 
 <!--
