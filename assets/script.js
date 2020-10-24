@@ -1,7 +1,10 @@
 const interval = 1000;
+const quizButtonDiv = document.getElementById("quiz-button");
 const startButton = document.getElementById("start-button");
 const quizDiv = document.getElementById("quiz");
-const startingTime = 100;
+let timerDiv = document.getElementById("quizTimer");
+const startingTime = 50;
+let score = 0;
 const quizObject = {
     questions :[ 
     {
@@ -21,8 +24,8 @@ const quizObject = {
     },
     {
         question : "Where in our HTML file to we link to stylesheets and libraries that the page will access?",
-        multipleChoice : ["the JS File", "the <head> element", "the <html> element", "the <header> element"],
-        correctChoice : "the <head> element"
+        multipleChoice : ["the JS File", "the head element", "the html element", "the header element"],
+        correctChoice : "the head element"
     },
     {
         question : "How many <div> elements can you use in an HTML file?",
@@ -46,248 +49,122 @@ const quizObject = {
     },
     {
         question : "Which of these lines of JS code will set the variable 'input' to a value given by the user?",
-        multipleChoice : ["var num = input;", "var prompt = input('Give me a number!');", "var input === 'Give me a number!'", "var input = prompt('Give me a number!);"],
+        multipleChoice : ["var num = input;", "var prompt = input('Give me a number!');", "var input === 'Give me a number!'", "var input = prompt('Give me a number!');"],
         correctChoice : "var input = prompt('Give me a number!);"
     },
     {
         question : "How many times will the given loop run: for(var i = 0; i < 9; i++)",
         multipleChoice : ["10", "3^2", "i", "2^i"],
         correctChoice : "3^2"
-    }],
-    count : 0
+    }]
 }
 
 startButton.addEventListener("click", function(){
 
-    startButton.innerHTML = "";
-    let timerDiv = document.getElementById("quizTimer");
+    for (let i = 0; i < quizObject.questions.length; i++){
+        localStorage.setItem("q" + i, JSON.stringify(quizObject.questions[i]));
+    }
+    localStorage.setItem("quizCount", "0");
+    localStorage.setItem("score", JSON.stringify(score));
+
+    quizButtonDiv.innerHTML = "";
     timerDiv.setAttribute( "class", "row justify-content-center border rounded-pill");
-    let timeLeft = startingTime;
-    timerDiv.innerHTML = "Go!";
+
+    timerDiv.innerHTML = startingTime;
     let timer = setInterval( function(){
-        timerDiv.innerHTML = timeLeft;
-        if (timeLeft < 10){
-            timerDiv.innerHTML = "0" + timeLeft;
-        }
+        let timeLeft = timerDiv.innerHTML
+
+        
+        
         timeLeft--;
-        if (timeLeft < 0) {
-            clearInterval(timer);
-            // endQuiz();
-            //document.getElementById("countdown").innerHTML = "It's over"; //if there's no time left, programm in this 2 lines is clearing interval (nothing is counting now) 
-            //and you see "It's over" instead of time left
-          }
+        timerDiv.innerHTML = timeLeft;
+        if (timeLeft < 10  && timeLeft > 0){
+            timerDiv.innerHTML = "0" + timeLeft;
+        }else if (timeLeft <= 0) {
+            timeLeft = 0
+            timerDiv.innerHTML = timeLeft;
+            
+            endQuiz(timer);
+        }
+        
     }, interval)
 
-    const count = quizObject.count;
-    quizDiv.innerHTML = "<h1>"+ quizObject.questions[count].question + "</h1>" + "<ul id = 'multChoiceDiv' class = '' ></ul>";
+    quizDiv.innerHTML = "<h1 id = 'qTitle'></h1>" + "<ul id = 'multChoiceDiv' class = '' ></ul>";
     for (let i = 0; i < 4; i++){
         const multChoiceli = document.createElement("li");
-        multChoiceli.setAttribute("class", "badge");
-        multChoiceli.setAttribute("data-choice", i);
-        multChoiceli.innerHTML = "<p>" + quizObject.questions[count].multipleChoice[i] + "</p>"
-        multChoiceli.addEventListener("mouseover",  function(event){
-            event.target.setAttribute("class", "badge badge-info");
+        multChoiceli.setAttribute("class", "badge font-size display-4 m-3");
+        multChoiceli.setAttribute("id", "mc" + i);
+        multChoiceli.addEventListener("mouseover",  event => {
+            event.target.setAttribute("class", "badge badge-info display-4 m-3");
         }, true);
-        multChoiceli.addEventListener("mouseout", function(event){
-            event.target.setAttribute("class", "badge");
+        multChoiceli.addEventListener("mouseout", event => {
+            event.target.setAttribute("class", "badge display-4 m-3");
         }, true);
-        // multChoiceli.addEventListener("click", nextQuestion());
+        multChoiceli.addEventListener("click", event => {
+
+            let quizCount = JSON.parse(localStorage.getItem("quizCount"));
+            let qOb = JSON.parse(localStorage.getItem("q" + quizCount));
+            if (event.target.innerHTML === qOb.correctChoice) {
+                let newScore = JSON.parse(localStorage.getItem("score"));
+                newScore++;
+                localStorage.setItem("score", JSON.stringify(newScore));
+            }
+            else {
+                let timeLeft = timerDiv.innerHTML
+                timeLeft -= 5;
+                if (timeLeft < 0){
+                    timerDiv.innerHTML = 0;
+                    
+                    
+                    endQuiz(timer);
+                }else{
+                    timerDiv.innerHTML = timeLeft
+                }
+            }
+            quizCount++;
+            if (quizCount < quizObject.questions.length){
+                localStorage.setItem("quizCount", quizCount);
+                qOb = JSON.parse(localStorage.getItem("q" + quizCount));
+                renderQuiz(qOb);
+            }else{
+                
+                
+                endQuiz(timer);
+            }
+        });
         document.getElementById("multChoiceDiv").append(multChoiceli);
     }
-    
-    // if (count >= quizQuestions.length){
-    //     endQuiz();
-    // }
 
+    renderQuiz(JSON.parse(localStorage.getItem("q" + JSON.parse(localStorage.getItem("quizCount")))));
 });
 
-// function nextQuestion(){
-//     console.log(this);
-// }
+function renderQuiz(qOb){
+    document.getElementById("qTitle").innerHTML = qOb.question;
+    for (let i = 0; i < qOb.multipleChoice.length; i++){
+        document.getElementById("mc" + i).innerHTML = qOb.multipleChoice[i];
+    }
+}
 
-// function timerFunction() {
-//     let timeLeft = startingTime;
-//     let timer = setInterval( function(){
-//         let timerDiv = document.getElementById("quizTimer");
-//         timerDiv.innerHTML = "" + timeLeft;
-//         if (timeLeft < 10){
-//             timerDiv.innerHTML = "0" + timeLeft;
-//         }
-//         timeLeft--;
-//         if (timeLeft < 0) {
-//             clearInterval(timer);
-//             // endQuiz();
-//             //document.getElementById("countdown").innerHTML = "It's over"; //if there's no time left, programm in this 2 lines is clearing interval (nothing is counting now) 
-//             //and you see "It's over" instead of time left
-//           }
-//     }, interval)
-// }
+function endQuiz(timer){
 
-// function endQuiz(){
-//     return 0;
-// };
+    timerDiv.innerHTML = "Quiz Over!";
+    clearInterval(timer);
+    quizDiv.innerHTML = "<h1>Quiz Over</h1><p class = 'lead'>You scored " + localStorage.getItem("score") + " out of 10</p><form id = 'initials'><label for= 'initials'>Enter your initials</label><div class='row justify-content-center'><div class='col-2 form-group'><input id = 'first' type = 'text' class = 'form-control text-center' placeholder = '-' maxlength = '1'></div><div class='col-2 form-group'><input id = 'second' type = 'text' class='form-control text-center' placeholder = '-' maxlength = '1'></div><div class = 'col-2 form-group'><input id = 'third' type = 'text' class = 'form-control text-center' placeholder = '-' maxlength = '1'></div></div></form>";
+    const endButton = document.createElement("button");
+    endButton.setAttribute("class", "btn btn-outline-secondary");
+    endButton.innerHTML = "<a href = './highscores.html'>ENTER HIGHSCORE</a>"
+    endButton.addEventListener("click", function (){
+        const newScore = {
+            initials : document.getElementById("first").value + document.getElementById("second").value + document.getElementById("third").value,
+            score : JSON.parse(localStorage.getItem("score"))
+        }
+        if (!localStorage.getItem("highscores")){
+            localStorage.setItem("highscores", "[]")
+        }
+        let highscores = JSON.parse(localStorage.getItem("highscores"));
+        highscores.push(newScore);
+        localStorage.setItem("highscores", JSON.stringify(highscores));
+    });
+    quizButtonDiv.append(endButton);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    This code will:
-        1]display questions one at a time
-        2]display counter, count down
-        3]evaluate question responses
-            a.keep track of correct:incorrect responses
-            b.subract time from counter for incorrect answers
-        4]at end of quiz, get user initials
-        5]display high scores
-
-*/
-
-/*
-
-    step 01 (X):create array of question objects
-        questions will have properties:
-            -question
-            -aswers[a,b,c,d]
-            -correct answer = anwers[i]
-    step 02 (X):create a function that renders questions to the page one at a time
-    step 03 ():create a function that renders the high score list
-    step 04 ():create a function that adds to the high scores
-    step 05 ():create event listeners for user to select answer
-    step 06 ():create event listeners for user input of initials/delet high schores
-    step 07 ():create event listener to retake quiz/reset page
-    step 08 ():create timer for quiz
-    step 09 ():create function that evaluates user input
-
-*/
-//variables that will hold the questions and answers
-// var quizQuestion = document.querySelector(".question");
-// var multipleChoiceList = document.querySelector("#mulitple-choice");
-// var startButton = document.querySelector(".start-button");
-
-// console.log(quizQuestion);
-// console.log(multipleChoiceList);
-// //variable that holds the user's score
-// var score;
-
-// //variable that holds the time remaining for the quiz
-// var timeLeft;
-
-// //this array holds all the questions. each array element is an object with 3 parameters
-// var questions = [
-//     q1 = {
-//         question : "Which of these is a valid Markup language?",
-//         multipleChoice : ["python", "C++", "HTML", "Microsoft"],
-//         correctChoice : "HTML"
-//     },
-//     q2 = {
-//         question : "What does 'bit' mean?",
-//         multipleChoice : ["a little bit", "itty bitty", "Ribbit", "binary digit"],
-//         correctChoice : "binary digit"
-//     },
-//     q3 = {
-//         question : "What is the home page of a website usually called?",
-//         multipleChoice : ["index.html", "index[1]", "home.com", "None of the above"],
-//         correctChoice : "index.html"
-//     },
-//     q4 = {
-//         question : "Where in our HTML file to we link to stylesheets and libraries that the page will access?",
-//         multipleChoice : ["the JS File", "the <head> element", "the <html> element", "the <header> element"],
-//         correctChoice : "the <head> element"
-//     },
-//     q5 = {
-//         question : "How many <div> elements can you use in an HTML file?",
-//         multipleChoice : ["1 for each letter of the alphabet", "2^n, where n is the size fo your RAM in bytes", "as many as you need", "128"],
-//         correctChoice : "as many as you need"
-//     },
-//     q6 = {
-//         question : "Which of these isn't a valid command in Javascript?",
-//         multipleChoice : ["Math.floor(2.62);", "document.write('Hello World');", "var temperature = 98.6;", "for(each): run{foo};"],
-//         correctChoice : "for(each): run{foo};"
-//     },
-//     q7 = {
-//         question : "What doees CSS stand for?",
-//         multipleChoice : ["Central Styling Symbols", "Create Small Sponges", "Cascading Style Sheet", "Cest Son Sac"],
-//         correctChoice : "Cascading Style Sheet"
-//     },
-//     q8 = {
-//         question : "What is the unsyntaxed code you may use to plan your program called?",
-//         multipleChoice : ["psudocode", "precode", "library", "object-oriented programming"],
-//         correctChoice : "psudocode"
-//     },
-//     q9 = {
-//         question : "Which of these lines of JS code will set the variable 'input' to a value given by the user?",
-//         multipleChoice : ["var num = input;", "var prompt = input('Give me a number!');", "var input === 'Give me a number!'", "var input = prompt('Give me a number!);"],
-//         correctChoice : "var input = prompt('Give me a number!);"
-//     },
-//     q10 = {
-//         question : "How many times will the given loop run: for(var i = 0; i < 9; i++)",
-//         multipleChoice : ["10", "3^2", "i", "2^i"],
-//         correctChoice : "3^2"
-//     }
-// ];
-
-// //This is the function that renders the question to the page
-// function renderQuiz(questionNum){
-
-//     //first clear the elements
-//     quizQuestion.textContent = "";
-//     multipleChoiceList.innerHTML = "";
-
-//     //creates an easily accesible object containing the current question
-//     var questionObject = questions[questionNum];
-
-//     //next display the question and create the answers in a list
-//     quizQuestion.textContent = questionObject.question;
-//     for(var i = 0; i < questionObject.multipleChoice.length; i ++){
-//         var multChoiceli = document.createElement("li");
-//         multChoiceli.setAttribute("id", "possible-answer")
-//         multChoiceli.setAttribute("class", "row m-1")
-//         multChoiceli.textContent = questionObject.multipleChoice[i];
-//         var selectButton = document.createElement("button");
-//         selectButton.setAttribute("class", "button rounded-button float-right m-1");
-//         selectButton.textContent = "SELECT";
-
-//         multChoiceli.appendChild(selectButton);
-//         multipleChoiceList.appendChild(multChoiceli);
-//         selectButton.addEventListener("click", function(event){
-//             //next questino function
-//         })
-//     }
-
-// }
-
-// function renderScores(){
-//     var containerEl = document.querySelector(".container");
-//     var btnEl = document.querySelector("#btn");
-//     var colClass = "col-md-4 text-center border bg-light";
-
-
-// }
-
-// startButton.addEventListener("click", function(){
-//     var questionsIndex = 0;
-//     renderQuiz(questionsIndex);
-// });
+}

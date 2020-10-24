@@ -1,117 +1,47 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home Page</title>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Home Page</title>
 
-        <link rel ="stylesheet" href ="">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    </head>
+      <link rel ="stylesheet" href ="">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">  
+  </head>
 
-    <body style="background-image: url(https://cdn.britannica.com/08/98408-050-6C806B94/Skyline-Baltimore-Md.jpg)">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <title class="navbar-brand">Maker BRYG</title>
+  <body class = "container-fluid">
 
-            <div class="navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="highscores.html">High Scores</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
-        <!-- card that displays quiz questions -->
-        <main class = "container">
-            <div class = "row">
-                <div class = "col-md-3"></div>
-                <div id = "quiz" class = "card col-md-6 m-3">
-                
-                    <h1 class = "question card-header m-3">Welcome to the coding quiz</h1>
-                    <ul id = "mulitple-choice" class = "card-body">Answer the coding questions and get the highscore! If the time reaches 0 the quiz will end.
-                        <li> <button id = "row" class = "start-button">Start Quiz</button></li>
-                    </ul>
-                   
-                </div>
-            </div>
-        </main>
-        <!-- footer -->
-        <footer>
+    <!-- Here's the navbar at the top of the screen -->  
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 
-        </footer>
-        <script src = "assets/script.js"></script>
-    </body>
-</html>
+      <h5 class="my-0 mr-md-auto font-weight-normal">Coding Quiz</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-info" href="./highscores.html">Highscores</a>
+      </nav>
+  
+    </div>
 
-<!--
-questions:
+    <!-- this div starts empty, but we'll put the timer in here once the quiz starts -->
+    <div id="quizTimer">
+    </div>
 
-1.Which of these is a valid Markup language?
-    python
-    C++
-    (HTML)
-    Microsoft
+    
 
-2.What does "bit" mean?
-    a little bit
-    itty bitty
-    Ribbit
-    (binary digit)
+    <!-- this is the div that holds the quiz intro and will hold the questions -->
+    <div id = "quiz" class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
 
-3.What is the home page of a website usually called?
-    (index.html)
-    index[i]
-    home.com
-    none of the above
+      <h1 id = "intro-title" class="display-4">Welcome to the Coding Quiz!</h1>
+      <p id = "intro-text" class="lead">Time to test your knowlege about front end web development. This is a timed quiz; the faster you finish, the better your score. But be careful, incorrect answers will result in time being taken away!</p>
+    
+    </div>
 
-4.Where in our HTML file to we link to stylesheets and libraries that the page will access?
-    The JS file
-    (The <head> element)
-    The <html> element
-    The <header> element
+    <div id = "quiz-button" class = "row justify-content-center">
+      <button id = "start-button" type = "button" class = "btn btn-outline-secondary">Start the Quiz</button>
+    </div>
 
-5.How many <div> elements can you use in an HTML file?
-    1 for each letter of the alphabet
-    2^n, where n is the size of your RAM in bytes
-    (As many as you need)
-    128
-
-6.Which of these isn't a valid command in Javascript?
-    Math.floor
-    (2.62);
-    document.write("Hello World!");
-    var temperature = 98.6;
-    (for(each): run{foo})
-
-7.What does CSS stand for?
-    Central Styling Symbols
-    Create Small Sponges
-    (Cascading Style Sheet)
-    Cest Son Sac
-
-8.What is the unsyntaxed code you may use to plan your program called?
-    (psudocode)
-    precode
-    library
-    object-oriented programing
-
-9.Which of these lines of JS code will set the variable "input" to a value given by the user?
-    var num = input
-    var prompt = input("Give me a number!")
-    var input === "Give me a number!"
-    (var input = prompt("Give me a number!");)
-
-10.How many times will the given loop run: for(var i = 0; i < 9; i++){...}
-    10
-    (3^2)
-    i
-    2^i
-
- -->
+    <script src = "./assets/script.js"></script>
+    <script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity = "sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin = "anonymous"></script>
+    <script src = "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity = "sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin = "anonymous"></script>
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity = "sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin = "anonymous"></script>
+  </body>
+  </html>

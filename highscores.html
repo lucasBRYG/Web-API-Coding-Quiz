@@ -1,43 +1,46 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home Page</title>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Highscores</title>
 
-        <link rel ="stylesheet" href ="">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    </head>
+      <link rel ="stylesheet" href ="">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">  
+  </head>
 
-    <body style="background-image: url(https://cdn.britannica.com/08/98408-050-6C806B94/Skyline-Baltimore-Md.jpg)">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <title class="navbar-brand">Maker BRYG</title>
+  <body class = "container-fluid">
 
-            <div class="navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
-        <!-- card that displays highscores -->
-        <div id = "highscores" class = "card">
-        
-            
-        </div>
+    <!-- Here's the navbar at the top of the screen -->  
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 
-        <!-- footer -->
-        <footer>
+      <h5 class="my-0 mr-md-auto font-weight-normal">Coding Quiz</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-info" href="./index.html">Quiz</a>
+      </nav>
+  
+    </div>
 
-        </footer>
-        <script src = "assets/script.js"></script>
-    </body>
-</html>
+    <!-- this div starts empty, but we'll put the timer in here once the quiz starts -->
+    <div id="quizTimer">
+    </div>
+
+    
+
+    <!-- this is the div that holds the quiz intro and will hold the questions -->
+    <div id = "scores" class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+
+      <h1 id = "highscores-title" class="display-4">Highscores</h1>
+      <ul id = "highscores" class = "list-group justify-content-center">
+
+      </ul>
+
+    
+    </div>
+
+    <script src = "./assets/highscores.js"></script>
+    <script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity = "sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin = "anonymous"></script>
+    <script src = "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity = "sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin = "anonymous"></script>
+    <script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity = "sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin = "anonymous"></script>
+  </body>
+  </html>
