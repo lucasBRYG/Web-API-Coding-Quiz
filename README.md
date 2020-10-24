@@ -20,4 +20,11 @@ THEN I can save my initials and score
 # Live quiz
 try the quiz out for yourself at https://lucasbryg.github.io/Web-API-Coding-Quiz/
 
+# Screenshots
+![Quiz start page](./assets/screenshots/intro.png?raw=true "Quiz start page")
+![Quiz in progress](./assets/screenshots/quiz.png?raw=true "Qestions")
+![User Enter's Initials](./assets/screenshots/initials.png?raw=true "Initials")
+![Highscores](./assets/screenshots/scorepage1.png?raw=true "Highscores page")
+
+
 
