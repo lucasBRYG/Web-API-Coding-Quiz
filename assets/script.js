@@ -50,7 +50,7 @@ const quizObject = {
     {
         question : "Which of these lines of JS code will set the variable 'input' to a value given by the user?",
         multipleChoice : ["var num = input;", "var prompt = input('Give me a number!');", "var input === 'Give me a number!'", "var input = prompt('Give me a number!');"],
-        correctChoice : "var input = prompt('Give me a number!);"
+        correctChoice : "var input = prompt('Give me a number!');"
     },
     {
         question : "How many times will the given loop run: for(var i = 0; i < 9; i++)",
