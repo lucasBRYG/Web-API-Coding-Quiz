@@ -1,8 +1,31 @@
 # Web-API-Coding-Quiz
-A short quiz to test your knowledge. Uses APIs
+
+This is a basic application that will generate a random password, following criteria that the user provides
+
+## Live Site
+
+https://lucasbryg.github.io/Password-Generator-App/
 
 
-# criteria
+![Quiz start page](./assets/screenshots/intro.png?raw=true)
+
+
+---
+
+### Table of Contents
+
+- [Description](#description)
+- [How to Use](#how-to-use)
+- [Screenshots](#screenshots)
+- [Author Info](#author-info)
+
+---
+
+## Description
+
+This is a short quiz that will let the user enter their initials and save their score. 
+
+### User Story
 ```
 GIVEN I am taking a code quiz
 WHEN I click the start button
@@ -17,14 +40,45 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
-# Live quiz
-try the quiz out for yourself at https://lucasbryg.github.io/Web-API-Coding-Quiz/
+##### Technologies
 
-# Screenshots
-![Quiz start page](./assets/screenshots/intro.png?raw=true "Quiz start page")
-![Quiz in progress](./assets/screenshots/quiz.png?raw=true "Qestions")
-![User Enter's Initials](./assets/screenshots/initials.png?raw=true "Initials")
-![Highscores](./assets/screenshots/scorepage1.png?raw=true "Highscores page")
-
+- JavaScript
+- Html
+- CSS (Bootstrap)
+- deployed on Github
+- local storage
 
 
+## How To Use
+
+This app is hosted on Github. Visit https://lucasbryg.github.io/Password-Generator-App/ to try it out; Start the quiz and answer the multiple choice questions. The quiz is timed, and incorrect answers will take time away. When the quiz is finished, you can enter your initials and compare your score with previouse attempts.
+
+## Screenshots
+
+###### Home Page
+
+![Quiz start page](./assets/screenshots/intro.png?raw=true)
+
+###### Quiz
+
+![Quiz in progress](./assets/screenshots/quiz.png?raw=true)
+
+###### Enter your score
+
+![User Enter's Initials](./assets/screenshots/initials.png?raw=true)
+
+###### Highscores
+
+![Highscores](./assets/screenshots/scorepage1.png?raw=true)
+
+
+---
+
+
+
+## Author
+
+- Linkedin -- https://www.linkedin.com/in/lucas-bryg-codes/
+- GitHub -- https://github.com/lucasBRYG/
+
+[Back To The Top](#Web-API-Coding-Quiz)
